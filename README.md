@@ -1,31 +1,60 @@
-# Remote for Google Slides™
-![](http://i.imgur.com/lbFE1BJ.png)
-Remote for Google Slides™ is a Chrome Extension + Webapp that allows you to control the presentation slide on another device, remotely.
+![](https://i.imgur.com/R9nLK8w.jpg)
 
-## Download
-[![](http://i.imgur.com/xFuWEDa.png)](https://chrome.google.com/webstore/detail/google-slides-remote/pojijacppbhikhkmegdoechbfiiibppi?utm_source=limhenry.xyz)
+# Remote for Google Slides
 
-Get the Chrome Extension on [Chrome Web Store](https://chrome.google.com/webstore/detail/google-slides-remote/pojijacppbhikhkmegdoechbfiiibppi?utm_source=limhenry.xyz)
+> Remote for Google Slides is a [Chrome Extension]() + [Progressive Web App]() that allows you to control the presentation slide on another device, remotely.
 
-## Demo 
-[![YouTube](http://i.imgur.com/2vJFec7.png)](https://youtu.be/VxiU5x9Z5uw)
-Youtube : [https://youtu.be/VxiU5x9Z5uw](https://youtu.be/VxiU5x9Z5uw)
+
+### Download
+[![](http://i.imgur.com/xFuWEDa.png)](https://chrome.google.com/webstore/detail/google-slides-remote/pojijacppbhikhkmegdoechbfiiibppi?utm_source=github)
+
+Get Remote for Google Slides Chrome Extension on [Chrome Web Store](https://chrome.google.com/webstore/detail/google-slides-remote/pojijacppbhikhkmegdoechbfiiibppi?utm_source=github)
 
 ## Get Started
  - Go to Google Slides and open any presentation slide
- - Click on dropdown button (▼) and select "Present in new window"
-   ![https://limhenry.xyz/slide/slide0.png](https://limhenry.xyz/slide/slide0.png)
- - Wait for the presentation fully load.
- - A notification will popup and show a link with unique ID
-  ![https://limhenry.xyz/slide/slide1.png](https://limhenry.xyz/slide/slide1.png)
- - Open the link on another device
- - A notification will pop out again once both devices are ready
- ![https://limhenry.xyz/slide/slide2.png](https://limhenry.xyz/slide/slide2.png)
+ - Rename the URL from `docs.google.com/presentation/d/your_slide_id/edit` to `docs.google.com/presentation/d/your_slide_id/present`
+ - Wait for the presentation fully load
+ - A notification will popup and show a link with a 6-digits code  
+![](https://i.imgur.com/vDRTaoY.png)  
+ - You can also find the code from the bottom control bar  
+![](https://i.imgur.com/MQAg496.png)  
+ - Open the [s.limhenry.xyz](https://slides.limhenry.xyz) on another device and enter the code on the page
+ - You are ready to go!
+
+## Release Note
+**Version 2.0.1** 
+ - Bug fixes  
+ - Improvements for reliability and speed  
+ 
+**Version 2.0**  
+ - New logo! New design!  
+ - "Previous slide" is now working  
+ - Improvements for reliability and speed  
+  
+**Version 0.5.5**  
+ - Bug fixes   
+
+**Version 0.5.4**  
+ - Bug fixes  
+
+**Version 0.5.3**  
+ - New Feature: Now showing current slide  
+
+**Version 0.5.2**  
+ - Added Google Analytics  
+ 
+## Roadmap
+ :x: Speaker Note  
+ :x: Recent Slides  
+ :x: Reset/Regenerate Slide ID Button
+ 
+## Techs
+ - [Preact](https://preactjs.com/)  
+ - Progressive Web Apps  
+ - [Firebase](https://firebase.google.com) (Firebase Realtime Database)  
 
 ## About
-Version: 0.5.1
-
-This extension is created and developed by Henry Lim
+This extension is created and developed by [Henry Lim](https://limhenry.xyz)
 
 Any question? Find me at [@henrylim96](https://twitter.com/henrylim96) or email me at henry (at) limhenry.xyz
 
@@ -33,3 +62,6 @@ Any question? Find me at [@henrylim96](https://twitter.com/henrylim96) or email 
 This program is not by Google nor is it officially supported by Google
 
 The program is provided as is and the author is not responsible for any problems as a result of the use of this program.
+
+## License
+Project is published under the [Apache License 2.0](LICENSE).
