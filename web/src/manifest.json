@@ -1,0 +1,26 @@
+{
+  "name": "Remote for Google Slides",
+  "short_name": "Remote",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff",
+  "theme_color": "#000",
+  "icons": [
+    {
+      "src": "/assets/icons/icon_192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/icons/icon_256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "/assets/icons/icon_512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
