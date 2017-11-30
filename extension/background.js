@@ -29,7 +29,7 @@ chrome.runtime.onMessageExternal.addListener(
         if (request) {
             if (request.message) {
                 if (request.message == "version") {
-                    sendResponse({version: 2.0});
+                    sendResponse({version: "2.0.2"});
 				}
 				if (request.message == "guide") {
 					chrome.tabs.create({'url': chrome.extension.getURL('welcome.html')}, function(tab) {});
@@ -38,7 +38,6 @@ chrome.runtime.onMessageExternal.addListener(
         }
         return true;
     });
-
 
 chrome.runtime.onInstalled.addListener(function(details){
     if(details.reason == "install"){
@@ -62,7 +61,6 @@ chrome.runtime.onInstalled.addListener(function(details){
 		}
     }
 });
-
 
 chrome.notifications.onButtonClicked.addListener(function(){
   chrome.tabs.create({'url': chrome.extension.getURL('welcome.html')}, function(tab) {});

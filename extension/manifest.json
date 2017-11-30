@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Remote for Google Slides",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"offline_enabled": true,
 	"description": "Control Google Slides™ on any device, remotely.",
 	"short_name": "Remote for Google Slides",
@@ -22,7 +22,7 @@
 		}
 	],
 	"externally_connectable": {
-		"matches": ["*://limhenry.xyz/*"]
+		"matches": ["*://*.limhenry.xyz/*", "http://localhost:8080/*"]
 	},
 	"background": {
 		"scripts": ["background.js"],

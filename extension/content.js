@@ -59,11 +59,14 @@ function listenToFirebase() {
                 if (data.current_slide > currentslide) {
                     var wheelDelta = -150;
                     firebase.database().ref('/slides/' + slideid + '/current_slide').set(currentslide + 1);
+                    var speaker_note = viewerData.docData[1][currentslide][8];
                 }
                 else if (data.current_slide < currentslide) {
                     var wheelDelta = 150;
                     firebase.database().ref('/slides/' + slideid + '/current_slide').set(currentslide - 1);
+                    var speaker_note = viewerData.docData[1][currentslide - 2][8];
                 }
+                firebase.database().ref('/slides/' + slideid + '/speaker_note').set(speaker_note);
                 firebase.database().ref('/slides/' + slideid + '/timestamp').set(parseInt(Date.now()));
                 var script = document.createElement('script');
                 script.textContent = '(' + function (wheelDelta) {
@@ -127,6 +130,15 @@ function connectToFirebase() {
     })
 }
 
+var script = document.createElement('script');
+script.id = 'tmpScript';
+scriptContent = "document.querySelector('body').setAttribute('viewerData', JSON.stringify(viewerData))"
+script.appendChild(document.createTextNode(scriptContent));
+(document.body || document.head || document.documentElement).appendChild(script);
+var viewerData = JSON.parse(document.querySelector("body").getAttribute('viewerData'));
+document.querySelector("#tmpScript").remove();
+document.querySelector("body").removeAttribute("viewerData");
+
 if (window.location.host == 'slides.limhenry.xyz') {
     var isInstalledNode = document.createElement('div');
     isInstalledNode.id = 'extension-is-installed';
@@ -137,5 +149,3 @@ else {
     var slideid = getRandomSlideID();
     connectToFirebase();
 }
-
-

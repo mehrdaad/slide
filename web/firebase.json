@@ -43,7 +43,7 @@
         "headers": [
           {
             "key": "Link",
-            "value": "</bundle.dfdaf.js>; rel=preload; as=script, </style.8982c.css>; rel=preload; as=style, </route-home.chunk.451ab.js>; rel=preload; as=script"
+            "value": "</bundle.22714.js>; rel=preload; as=script, </style.41ede.css>; rel=preload; as=style, </route-home.chunk.e4a48.js>; rel=preload; as=script"
           }
         ]
       },
@@ -52,7 +52,7 @@
         "headers": [
           {
             "key": "Link",
-            "value": "</bundle.dfdaf.js>; rel=preload; as=script, </style.8982c.css>; rel=preload; as=style, </route-control.chunk.c2dbd.js>; rel=preload; as=script"
+            "value": "</bundle.22714.js>; rel=preload; as=script, </style.41ede.css>; rel=preload; as=style, </route-control.chunk.0f534.js>; rel=preload; as=script"
           }
         ]
       }
