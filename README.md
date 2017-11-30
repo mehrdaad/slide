@@ -44,7 +44,8 @@ Get Remote for Google Slides Chrome Extension on [Chrome Web Store](https://chro
  - Added Google Analytics  
  
 ## Roadmap
- :x: Speaker Note  
+ :white_check_mark: Speaker Note  
+ :white_check_mark: Timer
  :x: Recent Slides  
  :x: Reset/Regenerate Slide ID Button
  
