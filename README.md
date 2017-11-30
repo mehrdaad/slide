@@ -57,7 +57,7 @@ Get Remote for Google Slides Chrome Extension on [Chrome Web Store](https://chro
 ## About
 This extension is created and developed by [Henry Lim](https://limhenry.xyz)
 
-Any question? Find me at [@henrylim96](https://twitter.com/henrylim96) or email me at henry (at) limhenry.xyz
+Any question? Find me at [@henrylim96](https://twitter.com/henrylim96) or email me at lets.email.henry (at) gmail.com
 
 ## Disclaimer
 This program is not by Google nor is it officially supported by Google
