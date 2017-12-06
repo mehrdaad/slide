@@ -141,7 +141,6 @@ export default class Control extends Component {
 				<div class={style.footer}>
 					<span class={style.info}>Slide {currentSlide} of {totalSlide}</span>
 					<span class={style.timer}>{timer}</span>
-					{/* <button id={style.disconnect} onClick={this.disconnect}>Disconnect</button> */}
 				</div>
 			</div>
 		);

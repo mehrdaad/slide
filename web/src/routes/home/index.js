@@ -74,20 +74,47 @@ export default class Home extends Component {
 							}
 						});
 				}
-
 			}
 		}
+	}
+
+	componentDidMount () {
+		let adsbygoogle = document.querySelector('.adsbygoogle');
+		adsbygoogle.style.display = 'inline-block';
+		adsbygoogle.style.width = '320px';
+		adsbygoogle.style.height = '100px';
+		adsbygoogle.setAttribute('data-ad-client', 'ca-pub-3866326270033666');
+		adsbygoogle.setAttribute('data-ad-slot', '1704033997');
+		adsbygoogle.removeAttribute('data-adsbygoogle-status');
+		(window.adsbygoogle = window.adsbygoogle || []).push({});
+
+		let resizeTimer;
+		window.addEventListener('resize', (event) => {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(() => {
+				adsbygoogle.removeAttribute('data-adsbygoogle-status');
+				(window.adsbygoogle = window.adsbygoogle || []).push({});
+			}, 250);
+		  });
 	}
 
 	render({ }, { pin }) {
 		return (
 			<div class={style.home}>
-				<h1>Remote for<br />Google Slides</h1>
-				<input aria-label="Enter Code Here" id="input" type="number" value={pin} onInput={linkState(this, 'pin')} onkeyup={this.something} placeholder="Enter Code Here" />
-				<button aria-label="Connect" onClick={this.connect}>Connect</button>
-				<button aria-label="Install Extension" onClick={this.installExtension} id="install" class={style.install}>Install Extension</button>
-				<button aria-label="Help" onClick={this.openExtension} id="guide" class={style.install}>Help</button>
-				<div class={style.footer}>&copy; Copyright 2017 Henry Lim</div>
+				<div class={style.container}>
+					<h1>Remote for<br />Google Slides</h1>
+					<input aria-label="Enter Code Here" id="input" type="number" value={pin} onInput={linkState(this, 'pin')} onkeyup={this.something} placeholder="Enter Code Here" />
+					<button aria-label="Connect" onClick={this.connect}>Connect</button>
+					<button aria-label="Install Extension" onClick={this.installExtension} id="install" class={style.install}>Install Extension</button>
+					<button aria-label="Help" onClick={this.openExtension} id="guide" class={style.install}>Help</button>
+				</div>
+				
+				<div class={style.footer}>
+					<div class={style.ads}>
+						<ins class="adsbygoogle" />
+					</div>
+					<span>&copy; Copyright 2017 Henry Lim</span>
+				</div>
 			</div>
 		);
 	}

@@ -15,7 +15,8 @@ html, body {
 }
 
 #app {
-	height: 100%;
+	height: 100vh;
+    min-height: 100%;
 }
 
 button {
@@ -35,6 +36,40 @@ button {
 	font-weight: 600;
 }
 
+.toast {
+    min-width: 200px;
+    position: fixed;
+    background: #323232;
+    color: white;
+    padding: 16px 24px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	font-size: 14px;
+	z-index: 999;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	border-radius: 0;
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+	transform: translateY(100px); 
+	opacity: 0; 
+	transition: all 150ms linear;   
+}
+
+.toast[toggle] {
+	transform: translateY(0px); 
+	opacity: 1;    
+}
+
+.toast .button {
+	cursor: pointer;
+	margin-left: 32px;
+	font-weight: 500;
+    text-transform: uppercase;
+    color: #FFC107;
+}
+
 @media screen and (min-width: 640px){
 	html, body {
 		min-height: 100vh;
@@ -42,5 +77,12 @@ button {
 
 	#app {
 		height: 100vh;
+	}
+
+	.toast {
+		bottom: 16px;
+		left: 24px;
+		border-radius: 2px;
+		width: initial;
 	}
 }
