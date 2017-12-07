@@ -77,6 +77,7 @@
 }
 
 .home .footer {
+	max-width: 1000px;
 	width: 100%;
     margin-bottom: 8px;
     font-size: 0.7em;
@@ -91,10 +92,16 @@
 .home .ads {
 	margin-bottom: 6px;
 	display: block;
+	height: 110px;
 }
 
 @media screen and (min-width: 640px){
 	.home {
 		position: initial;
+	}
+
+	.home .ads {
+		max-width: 1000px;
+		height: 100%;
 	}
 }

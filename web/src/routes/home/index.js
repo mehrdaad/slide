@@ -80,20 +80,22 @@ export default class Home extends Component {
 
 	componentDidMount () {
 		let adsbygoogle = document.querySelector('.adsbygoogle');
-		adsbygoogle.style.display = 'inline-block';
-		adsbygoogle.style.width = '320px';
-		adsbygoogle.style.height = '100px';
+		adsbygoogle.style.display = 'block';
+		adsbygoogle.setAttribute('data-ad-slot', '2594658120');
+		adsbygoogle.setAttribute('data-ad-format', 'auto');
 		adsbygoogle.setAttribute('data-ad-client', 'ca-pub-3866326270033666');
-		adsbygoogle.setAttribute('data-ad-slot', '1704033997');
 		adsbygoogle.removeAttribute('data-adsbygoogle-status');
 		(window.adsbygoogle = window.adsbygoogle || []).push({});
-
 		let resizeTimer;
+		let width = window.innerWidth;
 		window.addEventListener('resize', (event) => {
 			clearTimeout(resizeTimer);
 			resizeTimer = setTimeout(() => {
-				adsbygoogle.removeAttribute('data-adsbygoogle-status');
-				(window.adsbygoogle = window.adsbygoogle || []).push({});
+				if (width !== window.innerWidth) {
+					width = window.innerWidth;
+					adsbygoogle.removeAttribute('data-adsbygoogle-status');
+					(window.adsbygoogle = window.adsbygoogle || []).push({});
+				}
 			}, 250);
 		  });
 	}

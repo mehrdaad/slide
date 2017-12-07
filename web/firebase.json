@@ -43,7 +43,7 @@
         "headers": [
           {
             "key": "Link",
-            "value": "</bundle.8d995.js>; rel=preload; as=script, </style.d7ab5.css>; rel=preload; as=style, </route-home.chunk.595b5.js>; rel=preload; as=script"
+            "value": "</bundle.8d995.js>; rel=preload; as=script, </style.980bc.css>; rel=preload; as=style, </route-home.chunk.595b5.js>; rel=preload; as=script"
           }
         ]
       },
@@ -52,11 +52,11 @@
         "headers": [
           {
             "key": "Link",
-            "value": "</bundle.8d995.js>; rel=preload; as=script, </style.d7ab5.css>; rel=preload; as=style, </route-control.chunk.0f534.js>; rel=preload; as=script"
+            "value": "</bundle.8d995.js>; rel=preload; as=script, </style.980bc.css>; rel=preload; as=style, </route-control.chunk.0f534.js>; rel=preload; as=script"
           }
         ]
       }
     ],
     "public": "build"
-  }  
+  }
 }
