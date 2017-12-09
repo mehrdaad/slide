@@ -2,23 +2,20 @@
 <html>
 
 <head>
-	<title>Remote for Google Slides (Alpha)</title>
-
+	<title>Remote for Google Slides</title>
 	<meta charset="utf-8">
-
 	<meta name="description" content="Remote for Google Slides is a Chrome Extension + web app that allows you to control the presentation slide on another device, remotely."
 	/>
-
 	<meta name="author" content="Henry Lim">
 	<link rel="shortcut icon" href="logo_48.png">
 </head>
 
 <style>
 	body {
-		background: rgba(0, 0, 0, .01);
+		background: #fff;
 		color: #333;
 		margin: 0;
-		font-family: Arial;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	}
 
 	h2 {
@@ -27,7 +24,8 @@
 
 	p,
 	li {
-		font-size: 13px;
+		font-size: 14px;
+		line-height: 28px;
 	}
 
 	a {
@@ -35,48 +33,19 @@
 		font-weight: 600;
 	}
 
-	.message {
-		font-size: 14px;
-		font-weight: 700;
-		color: #000;
-		text-shadow: .3px .3px .3px #FFF;
-		background-color: #f9edbe;
-		border-bottom: 1px solid #f0c36d;
-		padding: 0;
-		max-height: 50px;
-	}
-
-	.message.alpha {
-		background-color: red;
-		color: white;
-	}
-
-	.message.alpha svg {
-		pointer-events: none;
-		width: 18px;
-		height: 18px;
-		vertical-align: middle;
-		fill: white;
-		margin-right: 4px;
-		margin-bottom: 2px;
-	}
-
-	.message h2 {
-		text-align: center;
-		font-size: 14px;
-		padding: 10px;
-		font-weight: 600;
-		margin: 0;
-	}
-
 	.section {
-		width: 600px;
+		max-width: 680px;
 		margin: 0 auto;
 		padding: 24px 0;
+		width: calc(100% - 32px);
+		box-sizing: border-box;
 	}
 
 	.header {
-		margin: 0em auto 2.3em;
+		margin: 12px auto 36px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 
 	.header h2 {
@@ -131,44 +100,52 @@
 </head>
 
 <body>
-	<div class="message">
-		<h2>Make sure you read this guide properly!</h2>
-	</div>
 	<div class="section">
 		<div class="header">
-			<img src="logo_128.png" width="50px" width="50px">
-			<h2>Remote for Google Slides</h2>
+			<div class="logo">
+				<img src="logo_128.png" width="50px" width="50px">
+				<h2>Remote for Google Slides</h2>
+			</div>
 		</div>
 		<div class="card">
 			<h2>What is Remote for Google Slides?</h2>
 			<p>Remote for Google Slides is a
-				<a href="https://chrome.google.com/webstore/detail/remote-for-google-slides/pojijacppbhikhkmegdoechbfiiibppi"
-				 target="_blank">Chrome Extension</a> +
-				<a href="https://s.limhenry.xyz/" target="_blank">Progressive Web App</a> that allows you to control the presentation slide on another device, remotely.</p>
+				<a href="https://chrome.google.com/webstore/detail/remote-for-google-slides/pojijacppbhikhkmegdoechbfiiibppi" target="_blank">Chrome Extension</a> +
+				<a href="https://s.limhenry.xyz/" target="_blank">Progressive Web App</a> that allows you to control the presentation slide on another device, remotely.
+			</p>
+		</div>
+		<div class="card">
+			<h2>New in Version 2.0.3:</h2>
+			<ul>
+				<li>Now you don't need to rename the URL anymore! Just click the "
+					<b>Present with Remote</b>" button on the top of the page!</li>
+				<li>More controls! Now you can refresh the 6-digit code and stop the remote.</li>
+				<li>Now you can control
+					<a target="_blank" href="https://ludus.one/">Ludus</a> using Remote for Google Slides! (This feature is currently in beta)</li>
+			</ul>
 		</div>
 		<div class="card">
 			<h2>How do I use Remote for Google Slides?</h2>
 			<ul>
-				<li>Go to
-					<a href="https://docs.google.com/presentation/" target="_blank">Google Slides</a> and open any presentation slide</li>
-				<li class="highlight">Rename the URL from
-					<code>docs.google.com/presentation/d/<i>your_slide_id</i>/<b>edit</b></code> to
-					<code>docs.google.com/presentation/d/<i>your_slide_id</i>/<b>present</b></code>
-				</li>
-				<li>Wait for the presentation fully load.</li>
-				<li>A notification will popup and show a link with a 6-digits code</li>
+				<li>Open a presentation in
+					<a href="https://slides.google.com/" target="_blank">Google Slides</a>.</li>
+				<li>On the top right, click the "
+					<b>Present with Remote</b>" button.</li>
+				<img src="slide0.png">
+				<li>Wait until the presentation fully loaded.</li>
+				<li>A notification will popup and show a link with a 6-digits code.</li>
 				<img src="slide1.png">
-				<li>You can also find the code from the bottom control bar</li>
+				<li>You can also find the code from the bottom control bar.</li>
 				<img src="slide2.png">
-				<li>Open the
-					<a href="https://s.limhenry.xyz/" target="_blank">s.limhenry.xyz</a> on another device and enter the code on the page</li>
+				<li>Open
+					<a href="https://s.limhenry.xyz/" target="_blank">s.limhenry.xyz</a> on another device and enter the code on the page.</li>
 				<li>You are ready to go!</li>
 
 			</ul>
 		</div>
 		<div class="card">
 			<h2>Tips</h2>
-			<p>Now you can launch the web app from your home screen and app drawer</p>
+			<p>Now you can launch the web app from your home screen and app drawer. </p>
 			<ul>
 				<li>Open
 					<a href="https://s.limhenry.xyz/" target="_blank">s.limhenry.xyz</a> on your
@@ -182,9 +159,23 @@
 		</div>
 		<div class="card">
 			<h2>Release Note</h2>
+			<p>Version 2.0.3</p>
+			<ul>
+				<li>
+					<b>Beta Feature: Now you can control
+						<a href="https://ludus.one/" target="_blank">Ludus</a> using Remote for Google Slides!</b>
+				</li>
+				<li>
+					<b>Added "Present with Remote", "Refresh ID" and "Stop Remote" button.</b>
+				</li>
+				<li>Bug fixes</li>
+				<li>Improvements for reliability and speed</li>
+			</ul>
 			<p>Version 2.0.2</p>
 			<ul>
-				<li><b>New Features: Speaker Note, Timer</b></li>
+				<li>
+					<b>New Features: Speaker Note, Timer</b>
+				</li>
 				<li>Bug fixes</li>
 				<li>Improvements for reliability and speed</li>
 			</ul>
@@ -202,15 +193,10 @@
 		</div>
 		<div class="card">
 			<h2>About</h2>
-			<p>Version: 2.0.2</p>
-			<p>This extension is created and developed by
-				<a href="https://limhenry.xyz" target="_blank">Henry Lim</a>
-			</p>
+			<p><b>Version 2.0.3</b>. Last updated - December 9, 2017</p>
+			<p>This extension is created and developed by <a href="https://limhenry.xyz" target="_blank">Henry Lim</a>.</p>
 			<p>Any question? Find me at
-				<a href="https://twitter.com/henrylim96" target="_blank">@henrylim96</a> or email me at lets.email.henry (at) gmail.com</p>
-			<p>Source code is available on
-				<a href="https://www.github.com/limhenry/side">GitHub</a>
-			</p>
+				<a href="https://twitter.com/henrylim96" target="_blank">@henrylim96</a> or email me at <a href="mailto:lets.email.henry@gmail.com" target="_blank">lets.email.henry@gmail.com</a>.</p>
 		</div>
 		<div class="card">
 			<h2>Disclaimer</h2>
@@ -218,9 +204,11 @@
 			<p>The program is provided as is and the author is not responsible for any problems as a result of the use of this program.</p>
 		</div>
 		<div class="card">
-			<h2>LICENSE</h2>
+			<h2>License</h2>
 			<p>Copyright &copy; 2017 Henry Lim</p>
-			<p>Project is published under the <a href="https://github.com/limhenry/slide/blob/master/LICENSE" target="_blank">Apache License 2.0</a></p>
+			<p>Project is published under the
+				<a href="https://github.com/limhenry/slide/blob/master/LICENSE" target="_blank">Apache License 2.0</a>
+			</p>
 		</div>
 	</div>
 	<script src="analytics.js"></script>

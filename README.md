@@ -13,6 +13,7 @@ Learn More : [Meet Remote for Google Slides, a new way to control your presentat
   - wiser.my - [Gunakan Telefon Pintar Anda Sebagai Alat Kawalan Jauh Melalui Google Slides](https://wiser.my/gunakan-telefon-pintar-anda-sebagai-alat-kawalan-jauh-melalui-google-slides/)
   - WWWhatsnew - [Convierte tu smartphone en un control remoto para presentaciones con esta herramienta](https://wwwhatsnew.com/2017/12/04/convierte-tu-smartphone-en-un-control-remoto-para-presentaciones-con-esta-herramienta/)
   - cnBeta - [这款扩展可将手机当做Google Slides控制器](http://www.cnbeta.com/articles/tech/676409.htm)
+  - TekCrispy - [Crean extensión para Chrome que controla las diapositivas de Google Slides con el teléfono](https://www.tekcrispy.com/2017/12/06/extension-chrome-diapositivas-google-slides/)
 
 ### Download
 [![](http://i.imgur.com/xFuWEDa.png)](https://chrome.google.com/webstore/detail/google-slides-remote/pojijacppbhikhkmegdoechbfiiibppi?utm_source=github)
@@ -20,17 +21,24 @@ Learn More : [Meet Remote for Google Slides, a new way to control your presentat
 Get **Remote for Google Slides** Chrome Extension on [Chrome Web Store](https://chrome.google.com/webstore/detail/google-slides-remote/pojijacppbhikhkmegdoechbfiiibppi?utm_source=github)
 
 ## Get Started
- - Go to Google Slides and open any presentation slide
- - Rename the URL from `docs.google.com/presentation/d/your_slide_id/edit` to `docs.google.com/presentation/d/your_slide_id/present`
- - Wait for the presentation fully load
- - A notification will popup and show a link with a 6-digits code  
+ - Open a presentation in [Google Slides](https://slides.google.com/).
+ - On the top right, click the "**Present with Remote**" button.
+![](https://i.imgur.com/f2izVfl.png)
+ - Wait for the presentation fully loaded.
+ - A notification will popup and show a link with a 6-digits code.  
 ![](https://i.imgur.com/vDRTaoY.png)  
- - You can also find the code from the bottom control bar  
+ - You can also find the code from the bottom control bar.  
 ![](https://i.imgur.com/MQAg496.png)  
- - Open the [s.limhenry.xyz](https://slides.limhenry.xyz) on another device and enter the code on the page
+ - Open [s.limhenry.xyz](https://slides.limhenry.xyz) on another device and enter the code on the page
  - You are ready to go!
 
 ## Release Note
+**Version 2.0.3** 
+ - Beta Feature: Now you can control [Ludus](https://ludus.one/) using Remote for Google Slides!
+ - Added "Present with Remote", "Refresh ID" and "Stop Remote" button.
+ - Bug fixes  
+ - Improvements for reliability and speed 
+
 **Version 2.0.2** 
  - New Features: Speaker Note, Timer
  - Bug fixes  
@@ -44,24 +52,13 @@ Get **Remote for Google Slides** Chrome Extension on [Chrome Web Store](https://
  - New logo! New design!  
  - "Previous slide" is now working  
  - Improvements for reliability and speed  
-  
-**Version 0.5.5**  
- - Bug fixes   
-
-**Version 0.5.4**  
- - Bug fixes  
-
-**Version 0.5.3**  
- - New Feature: Now showing current slide  
-
-**Version 0.5.2**  
- - Added Google Analytics  
  
 ## Roadmap
  :white_check_mark: Speaker Note  
  :white_check_mark: Timer  
+ :white_check_mark: Reset/Regenerate Slide ID Button  
+ :white_check_mark: Integration with [Ludus](https://ludus.one/)  
  :x: Recent Slides  
- :x: Reset/Regenerate Slide ID Button
  
 ## Techs
  - [Preact](https://preactjs.com/)  
@@ -74,7 +71,7 @@ Want to support this project? Star this project on [GitHub](https://github.com/l
 ## About
 This extension is created and developed by [Henry Lim](https://limhenry.xyz)
 
-Any question? Find me at [@henrylim96](https://twitter.com/henrylim96) or email me at _lets.email.henry (at) gmail.com_
+Any question? Find me at [@henrylim96](https://twitter.com/henrylim96) or email me at [lets.email.henry@gmail.com](mailto:lets.email.henry@gmail.com)
 
 ## Disclaimer
 This program is not by Google nor is it officially supported by Google
