@@ -17,56 +17,86 @@ function getRandomSlideID() {
 }
 
 function getSlidesData() {
+    var ref = firebase.database().ref('/slides/' + slideid);
+    ref.getRoot().child(".info/connected").on("value", function (snapshot) {
+        if (snapshot.val()) {
+            ref.once('value').then(function (snapshot) {
+                if (snapshot.val().offline) {
+                    getSlidesData();
+                }
+            })
+        }
+    });
+    ref.onDisconnect().set({
+        offline: true,
+        timestamp: parseInt(Date.now()),
+        type: origin
+    });
     if (origin == 'ludus') {
         var slidetitle = document.querySelector('[property="og:title"]').content;
         var currentslide = parseInt(document.querySelector('#current-slide').innerHTML);
         var totalslide = parseInt(document.querySelector('#total-slides').innerHTML);
-        firebase.database().ref('/slides/' + slideid).set({
+        ref.set({
             current_slide: currentslide,
             total_slide: totalslide,
             title: slidetitle,
-            id: docsID,
-            type: 'ludus'
+            type: origin
         });
+        chrome.runtime.sendMessage({
+            from: 'content',
+            subject: 'showNotification',
+            msg: `Enter code -  ${slideid} in s.limhenry.xyz`
+        });
+        changeSlides();
     } else {
         var slidetitle = document.querySelector('meta[property="og:title"]').content;
         var currentslide = parseInt(document.querySelector('.goog-flat-menu-button-caption').getAttribute('aria-posinset'));
         var totalslide = parseInt(document.querySelector('.goog-flat-menu-button-caption').getAttribute('aria-setsize'));
         var speaker_note = viewerData.docData[1][currentslide - 1][8];
-        firebase.database().ref('/slides/' + slideid).set({
-            current_slide: currentslide,
-            total_slide: totalslide,
-            title: slidetitle,
-            id: docsID,
-            speaker_note: speaker_note,
-            type: 'googleslides'
+        var rfgs_id_container = document.querySelector('#rfgs_id_container');
+        ref.set({
+            type: origin
         });
-
-        if (document.querySelector('#rfgs_id_container')) {
+        if (rfgs_id_container) {
             document.querySelector('#rfgs_id_container').innerHTML = slideid;
-        }
-        else {
+            ref.set({
+                current_slide: parseInt(document.querySelector('.goog-flat-menu-button-caption').getAttribute('aria-posinset')),
+                total_slide: totalslide,
+                title: slidetitle,
+                speaker_note: speaker_note,
+                type: origin
+            });
+            changeSlides();
+        } else {
             var container = document.querySelector('.punch-viewer-nav-rounded-container');
             var divider = document.createElement("div");
             divider.className = 'goog-toolbar-separator goog-toolbar-separator-disabled goog-inline-block';
             var divider2 = document.createElement("div");
             divider2.className = 'goog-toolbar-separator goog-toolbar-separator-disabled goog-inline-block';
             var div = document.createElement("div");
-            div.className = 'goog-inline-block goog-flat-button'
-            div.style = 'text-align: center; line-height: 16px';
-            var label_container = document.createElement("div");
-            label_container.innerHTML = 'Slide ID:'
-            var id_container = document.createElement("div");
-            id_container.innerHTML = slideid;
-            id_container.id = 'rfgs_id_container';
-            id_container.style = 'font-size: 16px; font-weight: 600'
-            var guide_container = document.createElement("div");
-            guide_container.className = 'goog-inline-block goog-flat-button';
-            guide_container.innerHTML = 'Remote for Google Slides:<br><span style="font-size: 14px">https://s.limhenry.xyz<div>'
-            guide_container.style = 'text-align: center; font-size: 11px; line-height: 16px;';
+            div.className = 'goog-inline-block goog-flat-button';
+            div.style.margin = '0 4px';
+            div.style.padding = '0';
+            div.innerHTML = `
+                <div class="goog-inline-block goog-flat-button">
+                    <div class="punch-viewer-captioned-button" id="rfgs_show_id">
+                        <div style="width:24px; height:24px">
+                            <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" style="pointer-events: none; display: block; width: 100%; height: 100%; fill: #cacaca;"><g><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"></path></g></svg>
+                        </div>
+                        <div class="punch-viewer-speaker-notes-text goog-inline-block">Show ID & Start Remote</div>
+                    </div>
+                </div>
+                <div class="goog-inline-block goog-flat-button" style="text-align: center; line-height: 16px;">
+                    <div>Slide ID:</div>
+                    <div id="rfgs_id_container" style="font-size: 16px; font-weight: 600;">******</div>
+                </div>
+                <div class="goog-inline-block goog-flat-button" style="text-align: center; font-size: 11px; line-height: 16px;">
+                    Remote for Slides:<br>
+                    <span style="font-size: 14px">https://s.limhenry.xyz</span>
+                </div>`;
 
             var div2 = document.createElement("div");
-            div2.style.display = 'inline-block';
+            div2.style.display = 'inline-block'
             div2.innerHTML = `
                 <div class="goog-inline-block goog-flat-button">
                     <div class="punch-viewer-captioned-button" id="rfgs_refresh_id">
@@ -76,7 +106,7 @@ function getSlidesData() {
                         <div class="punch-viewer-speaker-notes-text goog-inline-block">Refresh ID</div>
                     </div>
                 </div>
-                <div class="goog-inline-block goog-flat-button">
+                <div class="goog-inline-block goog-flat-button" id="rfgs_stop_remote_container" style="display: none">
                     <div class="punch-viewer-captioned-button" id="rfgs_stop_remote">
                         <div style="width:24px; height:24px">
                             <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" style="pointer-events: none; display: block; width: 100%; height: 100%; fill: #cacaca;"><g><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></g></svg>
@@ -85,26 +115,50 @@ function getSlidesData() {
                     </div>
                 </div>`;
 
-            div.appendChild(label_container);
-            div.appendChild(id_container);
             container.appendChild(divider);
             container.appendChild(div);
-            container.appendChild(guide_container);
             container.appendChild(divider2);
             container.appendChild(div2);
 
-            document.querySelector('#rfgs_refresh_id').addEventListener('click', function() {
+            document.querySelector('#rfgs_refresh_id').addEventListener('click', function () {
                 chrome.storage.sync.remove(docsID, function (result) {
                     firebase.database().ref('/slides/' + slideid).remove();
                     slideid = getRandomSlideID();
                     connectToFirebase();
+                    setTimeout(function () {
+                        document.querySelector('#rfgs_show_id .punch-viewer-speaker-notes-text').innerHTML = 'Show ID';
+                        document.querySelector('#rfgs_id_container').innerHTML = "******";
+                    }, 1000);
                 });
             });
 
-            document.querySelector('#rfgs_stop_remote').addEventListener('click', function() {
+            document.querySelector('#rfgs_stop_remote').addEventListener('click', function () {
                 fbRef.child('current_slide').off('value', console.log());
                 document.querySelector('#rfgs_id_container').innerHTML = "-";
-                firebase.database().ref('/slides/' + slideid + '/speaker_note').set('');
+                document.querySelector('#rfgs_show_id .punch-viewer-speaker-notes-text').innerHTML = 'Show ID & Start Remote';
+                firebase.database().ref('/slides/' + slideid).set({
+                    offline: true,
+                    timestamp: parseInt(Date.now()),
+                    type: origin
+                });
+            })
+
+            document.querySelector('#rfgs_show_id').addEventListener('click', function () {
+                document.querySelector('#rfgs_stop_remote_container').style.display = 'inline-block';
+                document.querySelector('#rfgs_show_id .punch-viewer-speaker-notes-text').innerHTML = 'Hide ID';
+                document.querySelector('#rfgs_id_container').innerHTML = slideid;
+                changeSlides();
+                ref.set({
+                    current_slide: parseInt(document.querySelector('.goog-flat-menu-button-caption').getAttribute('aria-posinset')),
+                    total_slide: totalslide,
+                    title: slidetitle,
+                    speaker_note: speaker_note,
+                    type: origin
+                });
+                setTimeout(function () {
+                    document.querySelector('#rfgs_show_id .punch-viewer-speaker-notes-text').innerHTML = 'Show ID';
+                    document.querySelector('#rfgs_id_container').innerHTML = "******";
+                }, 1000);
             })
         }
     }
@@ -129,64 +183,61 @@ function changeSlides() {
                 }
             } else {
                 var currentslide = parseInt(document.querySelector('.goog-flat-menu-button-caption').getAttribute('aria-posinset'));
-                if (data.current_slide != currentslide) {
-                    var observer_content = new MutationObserver(function(mutations) {
-                        slideNumber = parseInt(document.querySelector('.goog-flat-menu-button-caption').getAttribute('aria-posinset'));
-                        var speaker_note = viewerData.docData[1][slideNumber - 1][8];
-                        firebase.database().ref('/slides/' + slideid + '/current_slide').set(slideNumber);
-                        firebase.database().ref('/slides/' + slideid + '/speaker_note').set(speaker_note);
-                        observer_content.disconnect();
-                    });
-                    var observer_number = new MutationObserver(function(mutations) {
-                        slideNumber = parseInt(document.querySelector('.goog-flat-menu-button-caption').getAttribute('aria-posinset'));
-                        var speaker_note = viewerData.docData[1][slideNumber - 1][8];
-                        firebase.database().ref('/slides/' + slideid + '/current_slide').set(slideNumber);
-                        firebase.database().ref('/slides/' + slideid + '/speaker_note').set(speaker_note);
-                        observer_number.disconnect();
-                    });
-                    var config = { attributes: true, childList: true, characterData: true, subtree: true };
+                if (data) {
+                    if (data.current_slide != currentslide) {
+                        var observer_content = new MutationObserver(function (mutations) {
+                            slideNumber = parseInt(document.querySelector('.goog-flat-menu-button-caption').getAttribute('aria-posinset'));
+                            var speaker_note = viewerData.docData[1][slideNumber - 1][8];
+                            firebase.database().ref('/slides/' + slideid + '/current_slide').set(slideNumber);
+                            firebase.database().ref('/slides/' + slideid + '/speaker_note').set(speaker_note);
+                            observer_content.disconnect();
+                        });
+                        var observer_number = new MutationObserver(function (mutations) {
+                            slideNumber = parseInt(document.querySelector('.goog-flat-menu-button-caption').getAttribute('aria-posinset'));
+                            var speaker_note = viewerData.docData[1][slideNumber - 1][8];
+                            firebase.database().ref('/slides/' + slideid + '/current_slide').set(slideNumber);
+                            firebase.database().ref('/slides/' + slideid + '/speaker_note').set(speaker_note);
+                            observer_number.disconnect();
+                        });
+                        var config = {
+                            attributes: true,
+                            childList: true,
+                            characterData: true,
+                            subtree: true
+                        };
 
-                    if (data.current_slide > currentslide) {
-                        var wheelDelta = -50;
-                        var newSlideValue = currentslide + 1;
-                        var speaker_note = viewerData.docData[1][newSlideValue - 1][8];
-                        observer_content.observe(document.querySelector('.punch-viewer-content'), config);   
-                    } else if (data.current_slide < currentslide) {
-                        var wheelDelta = 50;
-                        var newSlideValue = currentslide - 1;
-                        var speaker_note = viewerData.docData[1][newSlideValue - 1][8];
-                        observer_content.observe(document.querySelector('.punch-viewer-content'), config);
-                        observer_number.observe(document.querySelector('.goog-flat-menu-button-caption'), config);   
+                        if (data.current_slide > currentslide) {
+                            var wheelDelta = -50;
+                            var newSlideValue = currentslide + 1;
+                            var speaker_note = viewerData.docData[1][newSlideValue - 1][8];
+                            observer_content.observe(document.querySelector('.punch-viewer-content'), config);
+                        } else if (data.current_slide < currentslide) {
+                            var wheelDelta = 50;
+                            var newSlideValue = currentslide - 1;
+                            var speaker_note = viewerData.docData[1][newSlideValue - 1][8];
+                            observer_content.observe(document.querySelector('.punch-viewer-content'), config);
+                            observer_number.observe(document.querySelector('.goog-flat-menu-button-caption'), config);
+                        }
+
+                        firebase.database().ref('/slides/' + slideid + '/timestamp').set(parseInt(Date.now()));
+
+                        var script = document.createElement('script');
+                        script.textContent = '(' + function (wheelDelta) {
+                            var ele = document.querySelector('.punch-viewer-container');
+                            var evt = document.createEvent("Events");
+                            evt.initEvent('mousewheel', true, false);
+                            evt.wheelDelta = wheelDelta;
+                            ele.dispatchEvent(evt);
+                        } + ')(' + '\"' + wheelDelta + '\", ' + ')';
+
+                        (document.head || document.documentElement).appendChild(script);
+                        script.parentNode.removeChild(script);
                     }
-
-                    firebase.database().ref('/slides/' + slideid + '/timestamp').set(parseInt(Date.now()));
-
-                    var script = document.createElement('script');
-                    script.textContent = '(' + function (wheelDelta) {
-                        var ele = document.querySelector('.punch-viewer-container');
-                        var evt = document.createEvent("Events");
-                        evt.initEvent('mousewheel', true, false);
-                        evt.wheelDelta = wheelDelta;
-                        ele.dispatchEvent(evt);
-                    } + ')(' + '\"' + wheelDelta + '\", ' + ')';
-
-                    (document.head || document.documentElement).appendChild(script);
-                    script.parentNode.removeChild(script);
                 }
+
             }
         })
     })
-}
-
-function startRemote() {
-    chrome.runtime.sendMessage({
-        from: 'content',
-        subject: 'showNotification',
-        msg: `Enter code -  ${slideid} in s.limhenry.xyz`
-    });
-
-    getSlidesData();
-    changeSlides();
 }
 
 function connectToFirebase() {
@@ -200,14 +251,14 @@ function connectToFirebase() {
                     var save = {};
                     save[docsID] = slideid;
                     chrome.storage.sync.set(save);
-                    startRemote();
+                    getSlidesData();
                 }
             })
         } else {
             firebase.database().ref("/slides/" + result[docsID]).once('value').then(function (snapshot) {
                 if (snapshot.val()) {
                     slideid = result[docsID];
-                    startRemote();
+                    getSlidesData();
                 } else {
                     chrome.storage.sync.remove(docsID, function (result) {
                         slideid = getRandomSlideID();
@@ -237,13 +288,13 @@ if (window.location.host == 'slides.limhenry.xyz') {
         origin = 'ludus';
         slideid = getRandomSlideID();
         initFirebase();
+
         function waitForElementToDisplay() {
-            if(document.querySelector('#current-slide')!=null) {
+            if (document.querySelector('#current-slide') != null) {
                 connectToFirebase();
                 return;
-            }
-            else {
-                setTimeout(function() {
+            } else {
+                setTimeout(function () {
                     waitForElementToDisplay();
                 }, 500);
             }
