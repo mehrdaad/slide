@@ -63,7 +63,7 @@ export default class Home extends Component {
 	componentWillMount() {
 		if (typeof window !== 'undefined') {
 			if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
-				if (chrome.runtime) {
+				if (window.chrome && chrome.runtime) {
 					chrome.runtime.sendMessage('pojijacppbhikhkmegdoechbfiiibppi', { message: 'version' },
 						(reply) => {
 							if (!reply) {
