@@ -52,7 +52,7 @@ function getSlidesData() {
         var slidetitle = document.querySelector('meta[property="og:title"]').content;
         var currentslide = parseInt(document.querySelector('.goog-flat-menu-button-caption').getAttribute('aria-posinset'));
         var totalslide = parseInt(document.querySelector('.goog-flat-menu-button-caption').getAttribute('aria-setsize'));
-        var speaker_note = viewerData.docData[1][currentslide - 1][8];
+        var speaker_note = viewerData.docData[1][currentslide - 1][9];
         var rfgs_id_container = document.querySelector('#rfgs_id_container');
         ref.set({
             type: origin
@@ -158,7 +158,7 @@ function getSlidesData() {
                 setTimeout(function () {
                     document.querySelector('#rfgs_show_id .punch-viewer-speaker-notes-text').innerHTML = 'Show ID';
                     document.querySelector('#rfgs_id_container').innerHTML = "******";
-                }, 1000);
+                }, 2500);
             })
         }
     }
@@ -187,14 +187,14 @@ function changeSlides() {
                     if (data.current_slide != currentslide) {
                         var observer_content = new MutationObserver(function (mutations) {
                             slideNumber = parseInt(document.querySelector('.goog-flat-menu-button-caption').getAttribute('aria-posinset'));
-                            var speaker_note = viewerData.docData[1][slideNumber - 1][8];
+                            var speaker_note = viewerData.docData[1][slideNumber - 1][9];
                             firebase.database().ref('/slides/' + slideid + '/current_slide').set(slideNumber);
                             firebase.database().ref('/slides/' + slideid + '/speaker_note').set(speaker_note);
                             observer_content.disconnect();
                         });
                         var observer_number = new MutationObserver(function (mutations) {
                             slideNumber = parseInt(document.querySelector('.goog-flat-menu-button-caption').getAttribute('aria-posinset'));
-                            var speaker_note = viewerData.docData[1][slideNumber - 1][8];
+                            var speaker_note = viewerData.docData[1][slideNumber - 1][9];
                             firebase.database().ref('/slides/' + slideid + '/current_slide').set(slideNumber);
                             firebase.database().ref('/slides/' + slideid + '/speaker_note').set(speaker_note);
                             observer_number.disconnect();
@@ -209,12 +209,12 @@ function changeSlides() {
                         if (data.current_slide > currentslide) {
                             var wheelDelta = -50;
                             var newSlideValue = currentslide + 1;
-                            var speaker_note = viewerData.docData[1][newSlideValue - 1][8];
+                            var speaker_note = viewerData.docData[1][newSlideValue - 1][9];
                             observer_content.observe(document.querySelector('.punch-viewer-content'), config);
                         } else if (data.current_slide < currentslide) {
                             var wheelDelta = 50;
                             var newSlideValue = currentslide - 1;
-                            var speaker_note = viewerData.docData[1][newSlideValue - 1][8];
+                            var speaker_note = viewerData.docData[1][newSlideValue - 1][9];
                             observer_content.observe(document.querySelector('.punch-viewer-content'), config);
                             observer_number.observe(document.querySelector('.goog-flat-menu-button-caption'), config);
                         }
