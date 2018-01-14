@@ -16,11 +16,12 @@ export default class Control extends Component {
 	};
 
 	disconnect = () => {
-		if (confirm('Disconnect?')) {
-			document.querySelector('#speakernote').style.display = 'none';
-			document.querySelector('#control').style.display = 'flex';
-			route('/');
-		}
+		this.toggleOverlay();
+		// if (confirm('Disconnect?')) {
+		// 	document.querySelector('#speakernote').style.display = 'none';
+		// 	document.querySelector('#control').style.display = 'flex';
+		// 	route('/');
+		// }
 	}
 
 	toggleSpeakerNote = () => {
@@ -53,8 +54,25 @@ export default class Control extends Component {
 		}, 1000);
 	}
 
+	toggleOverlay = () => {
+		let dialog = document.querySelector('#dialog');
+		if (dialog.style.display === 'flex') {
+			dialog.style.display = 'none';
+		}
+		else {
+			dialog.style.display = 'flex';
+		}
+	}
+
 	constructor(props) {
 		super(props);
+
+		if (!navigator.onLine) {
+			this.setState({ nextBtnDisabled: true });
+			this.setState({ previousBtnDisabled: true });
+		}
+
+		// console.log('push to ga!');
 
 		let checkTimer = false;
 		this.id = props.id;
@@ -108,6 +126,16 @@ export default class Control extends Component {
 	render({ id }, { currentSlide, totalSlide, title, nextBtnDisabled, previousBtnDisabled, timer }) {
 		return (
 			<div class={style.main}>
+				<div class={style.dialog} id="dialog">
+					<div class={style.dialog_overlay} onClick={this.toggleOverlay} />
+					<div class={style.dialog_content}>
+						<p>put something inside</p>
+					</div>
+				</div>
+				<div class={style.connection} id="connection">
+					<div class={style.status} />
+					<span>Offline</span>
+				</div>
 				<div class={style.header}>
 					<div class={style.icon} onClick={this.disconnect}>
 						<svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false">

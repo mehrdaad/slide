@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Remote for Slides",
-	"version": "2.0.4",
+	"version": "2.0.5",
 	"offline_enabled": true,
 	"description": "Control Google Slides and Ludus on any device, remotely.",
 	"short_name": "Remote for Slides",

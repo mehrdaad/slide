@@ -18,7 +18,8 @@ export default class Home extends Component {
 			button.disabled = true;
 			button.innerHTML = 'Loading ...';
 			this.database.ref('slides/' + this.state.pin).once('value').then((snapshot) => {
-				if (snapshot.val()) {
+				if (snapshot.val() && !snapshot.val().offline) {
+					console.log(snapshot.val());
 					input.style.borderBottom = '1px solid #ccc';
 					button.disabled = false;
 					button.innerHTML = 'Connect';
@@ -51,7 +52,20 @@ export default class Home extends Component {
 
 	something = (e) => {
 		if (e.key === 'Enter') {
-			this.connect();
+			if (!document.querySelector('#connect_btn').disabled) {
+				this.connect();
+			}
+		}
+	}
+
+	notifyNetworkStatus(e) {
+		if (navigator.onLine) {
+			console.log('online');
+			document.querySelector('#connection').classList.remove('active');
+		}
+		else {
+			console.log('offline');
+			document.querySelector('#connection').classList.add('active');
 		}
 	}
 
@@ -97,16 +111,33 @@ export default class Home extends Component {
 					(window.adsbygoogle = window.adsbygoogle || []).push({});
 				}
 			}, 250);
-		  });
+		});
+
+		window.addEventListener('online', (e) => this.notifyNetworkStatus(e));
+		window.addEventListener('offline', (e) => this.notifyNetworkStatus(e));
+
+
+		// if (!navigator.onLine) {
+		// 	document.querySelector('#connection').style.display = 'flex';
+		// 	document.querySelector('#connect_btn').disabled = true;
+		// }
+		// else {
+		// 	document.querySelector('#connection').style.display = 'none';
+		// 	document.querySelector('#connect_btn').disabled = false;
+		// }
 	}
 
 	render({ }, { pin }) {
 		return (
 			<div class={style.home}>
+				<div class={style.connection} id="connection">
+					<div class={style.status} />
+					<span>Offline</span>
+				</div>
 				<div class={style.container}>
-					<h1>Remote for<br />Google Slides</h1>
+					<h1>Remote for Slides</h1>
 					<input aria-label="Enter Code Here" id="input" type="number" value={pin} onInput={linkState(this, 'pin')} onkeyup={this.something} placeholder="Enter Code Here" />
-					<button aria-label="Connect" onClick={this.connect}>Connect</button>
+					<button aria-label="Connect" onClick={this.connect} id="connect_btn">Connect</button>
 					<button aria-label="Install Extension" onClick={this.installExtension} id="install" class={style.install}>Install Extension</button>
 					<button aria-label="Help" onClick={this.openExtension} id="guide" class={style.install}>Help</button>
 				</div>
@@ -114,6 +145,9 @@ export default class Home extends Component {
 				<div class={style.footer}>
 					<div class={style.ads}>
 						<ins class="adsbygoogle" />
+					</div>
+					<div class={style.footer_link}>
+						<a href="https://limhenry.xyz/slides/">Home</a> &middot; <a href="https://paypal.me/henrylim96">Donate</a>
 					</div>
 					<span>&copy; Copyright 2017 Henry Lim</span>
 				</div>
