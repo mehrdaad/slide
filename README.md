@@ -1,10 +1,10 @@
-![](https://i.imgur.com/R9nLK8w.jpg)
+![](https://i.imgur.com/H8faJGq.jpg)
 
-# Remote for Google Slides
+# Remote for Slides
 
-> Remote for Google Slides is a [Chrome Extension]() + [Progressive Web App]() that allows you to control the presentation slide on another device, remotely.
+> [Remote for Slides](https://limhenry.xyz/slides/) (formerly known as Remote for Google Slides) is a Chrome Extension and a Progressive Web App that allows you to control [Google Slides](https://slides.google.com/) and [Ludus](https://ludus.one/) on any device, remotely, without the need for any extra hardware.
 
-Learn More : [Meet Remote for Google Slides, a new way to control your presentation slides](https://medium.com/@limhenry/meet-remote-for-google-slides-a-new-way-to-control-your-presentation-slides-c54a6b688674)
+Learn More : [Meet Remote for Slides, a new way to control your presentation slides](https://medium.com/@limhenry/meet-remote-for-google-slides-a-new-way-to-control-your-presentation-slides-c54a6b688674)
 
 ## Featered On
  - The Next Web (TNW) - [Turn your phone into a Google Slides remote control with this Chrome extension](https://thenextweb.com/apps/2017/12/04/turn-your-phone-into-a-google-slides-remote-control-with-this-chrome-extension/)
@@ -18,29 +18,33 @@ Learn More : [Meet Remote for Google Slides, a new way to control your presentat
 ### Download
 [![](http://i.imgur.com/xFuWEDa.png)](https://chrome.google.com/webstore/detail/google-slides-remote/pojijacppbhikhkmegdoechbfiiibppi?utm_source=github)
 
-Get **Remote for Google Slides** Chrome Extension on [Chrome Web Store](https://chrome.google.com/webstore/detail/google-slides-remote/pojijacppbhikhkmegdoechbfiiibppi?utm_source=github)
+Get **Remote for Slides** Chrome Extension on [Chrome Web Store](https://chrome.google.com/webstore/detail/google-slides-remote/pojijacppbhikhkmegdoechbfiiibppi?utm_source=github)
 
 ## Get Started
  - Open a presentation in [Google Slides](https://slides.google.com/).
  - On the top right, click the "**Present with Remote**" button.
 ![](https://i.imgur.com/f2izVfl.png)
- - Wait for the presentation fully loaded.
- - A notification will popup and show a link with a 6-digits code.  
-![](https://i.imgur.com/vDRTaoY.png)  
- - You can also find the code from the bottom control bar.  
-![](https://i.imgur.com/MQAg496.png)  
- - Open [s.limhenry.xyz](https://slides.limhenry.xyz) on another device and enter the code on the page
+ - Wait for the presentation fully loaded.  
+ - Click on the "Show ID & Start Remote" button to view the 6-digits code.  
+![](https://i.imgur.com/MBSh3Yg.png)  
+ - Open [s.limhenry.xyz](https://slides.limhenry.xyz) on another device and enter the code on the page.
  - You are ready to go!
 
 ## Release Note
+**Version 2.0.5**
+ - Bug fixes  
+ 
+**Version 2.0.4**
+ - Improvements for security  
+
 **Version 2.0.3** 
- - Beta Feature: Now you can control [Ludus](https://ludus.one/) using Remote for Google Slides!
- - Added "Present with Remote", "Refresh ID" and "Stop Remote" button.
+ - Beta Feature: Now you can control [Ludus](https://ludus.one/) using Remote for Google Slides!  
+ - Added "Present with Remote", "Refresh ID" and "Stop Remote" button.  
  - Bug fixes  
  - Improvements for reliability and speed 
 
 **Version 2.0.2** 
- - New Features: Speaker Note, Timer
+ - New Features: Speaker Note, Timer  
  - Bug fixes  
  - Improvements for reliability and speed  
 
